@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TabbedPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EncryptorNDecryptor.Pages.TextEncryption.TextHandlingMainPage"
+             xmlns:pages="using:EncryptorNDecryptor.Pages.TextEncryption">
+    
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+                     IconImageSource="settings.png"
+                     Clicked="OnSettingsClicked"/>
+    </TabbedPage.ToolbarItems>
+    
+    <!-- Encryption page:  -->
+    <pages:EncryptionPage x:Name="EncryptionPage" Title="Encryption"/>
+    <!-- Decryption page:  -->
+    <pages:DecryptionPage x:Name="DecryptionPage" Title="Decryption"/>
+   
+</TabbedPage>

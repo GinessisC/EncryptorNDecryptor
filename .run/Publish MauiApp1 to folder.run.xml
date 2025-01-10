@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publish MauiApp1 to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
+    <riderPublish configuration="Release" platform="Any CPU" runtime="android-arm" self_contained="true" target_folder="$PROJECT_DIR$/MauiApp1/bin/Release/net8.0-android/android-arm/publish" target_framework="net8.0-android" uuid_high="-1408029166161607813" uuid_low="-6830344918304197144">
+      <option name="extraSettings">
+        <map>
+          <entry key="AndroidKeyStore" value="true" />
+          <entry key="AndroidSigningKeyAlias" value="" />
+          <entry key="AndroidSigningKeyStore" value="" />
+          <entry key="RememberPasswords" value="false" />
+        </map>
+      </option>
+    </riderPublish>
+    <method v="2" />
+  </configuration>
+</component>

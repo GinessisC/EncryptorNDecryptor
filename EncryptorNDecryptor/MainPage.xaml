@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EncryptorNDecryptor.MainPage">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="50" x:Name="MainStackLayout">
+            
+            <Label Text="Choose option" Padding="20" HorizontalTextAlignment="Center" FontSize="25"/>
+
+            <Button
+                x:Name="ToEncryptPlainTextPage"
+                Text="Encrypt text"
+                Clicked="OnToEncryptPlainTextPageClicked"
+                HorizontalOptions="Fill" 
+                MaximumWidthRequest="250" />
+            
+            <Button
+                x:Name="ToEncryptFilePage"
+                BackgroundColor="Black"
+                Text="Encrypt file"
+                Clicked="OnToEncryptFilePageClicked"
+                HorizontalOptions="Fill" 
+                MaximumWidthRequest="250" />
+            
+            <Label Text="More about author:" Padding="0, 40, 0, 30" HorizontalTextAlignment="Center" FontSize="19"/>
+            
+            <Grid Padding="20, 50, 20, 20"> 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <ImageButton HorizontalOptions="Start" Source="youtube.png" Clicked="YoutubeImageButton_OnClicked" HeightRequest="45"/>
+                <ImageButton Grid.Column="1" HorizontalOptions="Start" Source="telegram.png" Clicked="TelegramImageButton_OnClicked" HeightRequest="45"/>
+                <ImageButton Grid.Column="2" HorizontalOptions="Start" Source="github.png" Clicked="GithubImageButton_OnClicked" HeightRequest="45"/>
+            </Grid>
+            
+        </VerticalStackLayout>
+        
+    </ScrollView>
+</ContentPage>
