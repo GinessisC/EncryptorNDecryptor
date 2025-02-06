@@ -100,4 +100,10 @@
       <None Remove="Resources\AppIcon\testforeg.svg" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Helpers\" />
+    </ItemGroup>
+    
+    
+    
 </Project>

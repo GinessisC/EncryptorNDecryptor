@@ -14,7 +14,6 @@
                 Clicked="OnToEncryptPlainTextPageClicked"
                 HorizontalOptions="Fill" 
                 MaximumWidthRequest="250" />
-            
             <Button
                 x:Name="ToEncryptFilePage"
                 BackgroundColor="Black"
@@ -23,7 +22,7 @@
                 HorizontalOptions="Fill" 
                 MaximumWidthRequest="250" />
             
-            <Label Text="More about author:" Padding="0, 40, 0, 30" HorizontalTextAlignment="Center" FontSize="19"/>
+            <Label Text="More about author:" Padding="0, 50, 0, 30" HorizontalTextAlignment="Center" FontSize="19"/>
             
             <Grid Padding="20, 50, 20, 20"> 
                 <Grid.ColumnDefinitions>

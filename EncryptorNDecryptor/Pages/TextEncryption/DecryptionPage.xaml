@@ -3,34 +3,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EncryptorNDecryptor.Pages.TextEncryption.DecryptionPage">
-    <VerticalStackLayout Padding="30">
+    <VerticalStackLayout Padding="30" Spacing="10">
         
+            <Label Text="Enter encrypted message ⬇️" />
+            
         <Editor x:Name="InputEncryptedMessageEditor"
                 BackgroundColor="WhiteSmoke"
-                Keyboard="Plain"
-                Text="Enter encrypted message"
-                TextColor="Gray"
-                HeightRequest="120"
-                Focused="Editor_Focused">
-            <Editor.GestureRecognizers>
-                <TapGestureRecognizer Tapped="InputEncryptedMessageEditor_Tapped" />
-            </Editor.GestureRecognizers>
+                TextColor="Black"
+                HeightRequest="120">
         </Editor>
         
         <Button x:Name="DecryptMessageButton"
-                Text="Decrypt message" Clicked="DecryptMessageButton_Clicked"/>
-
+                BackgroundColor="Black" Text="Decrypt message" Clicked="DecryptMessageButton_Clicked" MaximumWidthRequest="200"/>
+            
         <Editor x:Name="DecryptedMessageEditor" 
                 BackgroundColor="WhiteSmoke"
-                IsEnabled="False"
-                Keyboard="Plain"
+                Margin="0, 20, 0, 0"
                 Text="Here will be encrypted message"
-                TextColor="Gray"
-                HeightRequest="120"
-                Focused="Editor_Focused">
+                TextColor="Black"
+                HeightRequest="120">
         </Editor>
         <Button x:Name="CopyDecryptedMessage"
-                Text="Copy" Clicked="CopyDecryptedMessage_OnClicked"/>
-        
+                BackgroundColor="Black" Text="Copy" Clicked="CopyDecryptedMessage_OnClicked" MaximumWidthRequest="200"/>
     </VerticalStackLayout>
 </ContentPage>

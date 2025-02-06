@@ -15,5 +15,5 @@
     <pages:EncryptionPage x:Name="EncryptionPage" Title="Encryption"/>
     <!-- Decryption page:  -->
     <pages:DecryptionPage x:Name="DecryptionPage" Title="Decryption"/>
-   
+    
 </TabbedPage>

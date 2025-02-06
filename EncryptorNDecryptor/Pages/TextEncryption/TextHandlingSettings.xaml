@@ -2,64 +2,93 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:EncryptorNDecryptor.Pages.TextEncryption.ViewModels"
              x:Class="EncryptorNDecryptor.Pages.TextEncryption.TextHandlingSettings">
     
+    <ContentPage.BindingContext>
+        <viewModels:AlgorithmSettingsViewModel />
+    </ContentPage.BindingContext>
     <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="20">
+        
+        <VerticalStackLayout x:Name="MainVertStackLayout" Spacing="20" Padding="20">
             
-            <Editor x:Name="PubicKeyOfAnotherUserEditor"
-                    Margin="0, 20, 0, 0"
+            <Picker x:Name="EncAlgorithmPicker" 
+                    TitleColor="Black"
+                    Title="Click to choose type of encryption"
+                    SelectedIndexChanged="EncAlgorithmPicker_OnSelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>RSA</x:String>
+                    <x:String>AES</x:String>
+                    <x:String>BASE64</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            <Label x:Name="PubicKeyOfAnotherUserLabel" Text="Enter public key of user ⬇️" 
+                   Margin="0, 20, 0, 0" IsVisible="False"/>
+            <Editor x:Name="PubicKeyOfAnotherUserEditor" 
+                    Text="{Binding RsaParams.PublicKeyOfAnotherUser, Mode=TwoWay}"
+                    IsVisible="False"
                     BackgroundColor="WhiteSmoke"
-                    Keyboard="Plain"
-                    Text="Enter public key of user"
-                    TextColor="Gray"
-                    HeightRequest="100"
-                    Focused="Editor_Focused">
-                <Editor.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PublicKeyOfAnotherUserEditor_Tapped" />
-                </Editor.GestureRecognizers>
+                    HeightRequest="100">
             </Editor>
             
+            <Label x:Name="PublicKeyLabel" Text="Enter your public key ⬇️" 
+                   IsVisible="False"
+                   Margin="0, 20, 0, 0"/>
             <Editor x:Name="PubicKeyEditor"
-                    Margin="0, 20, 0, 0"
+                    Text="{Binding RsaParams.PublicKey, Mode=TwoWay}"
+
+                    IsVisible="False"
                     BackgroundColor="WhiteSmoke"
-                    Keyboard="Plain"
-                    Text="Enter your public key"
-                    TextColor="Gray" 
-                    HeightRequest="100"
-                    Focused="Editor_Focused">
-                <Editor.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PublicKeyEditor_Tapped" />
-                </Editor.GestureRecognizers>
+                    HeightRequest="100">
             </Editor>
             
+            <Label x:Name="PrivateKeyLabel" Text="Enter your private key ⬇️"
+                   IsVisible="False"
+                   Margin="0, 20, 0, 0"/>
             <Editor x:Name="PrivateKeyEditor"
-                    Margin="0, 20, 0, 0"
+                    Text="{Binding RsaParams.PrivateKey, Mode=TwoWay}"
+                    IsVisible="False"
                     BackgroundColor="WhiteSmoke"
-                    Keyboard="Plain"
-                    Text="Enter your private key"
-                    TextColor="Gray"
-                    HeightRequest="100"
-                    Focused="Editor_Focused">
-                <Editor.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PrivateKeyEditor_Tapped" />
-                </Editor.GestureRecognizers>
+                    HeightRequest="100">
             </Editor>
             
-            <Grid>
+            <Label x:Name="AesKeyLabel" Text="Enter your aes key ⬇️"
+                   IsVisible="False"
+                   Margin="0, 20, 0, 0"/>
+            <Editor x:Name="AesKeyEditor"
+                    Text="{Binding AesParams.Key, Mode=TwoWay}"
+                    IsVisible="False"
+                    BackgroundColor="WhiteSmoke"
+                    HeightRequest="100">
+            </Editor>
+            
+            <Label x:Name="AesIvLabel" Text="Enter your aes iv ⬇️"
+                   IsVisible="False"
+                   Margin="0, 20, 0, 0"/>
+            <Editor x:Name="AesIvEditor"
+                    Text="{Binding AesParams.IV, Mode=TwoWay}"
+                    IsVisible="False"
+                    BackgroundColor="WhiteSmoke"
+                    HeightRequest="100">
+            </Editor>
+            
+            <Grid Padding="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 
-                <Button x:Name="SaveSettingsButton" Text="Save changes"
+                <Button x:Name="SaveSettingsButton" Text="Save"
+                        Command="{Binding SaveSettingsCommand}"
                         TextColor="Azure" BackgroundColor="Black"
-                        Clicked="SaveSettingsButton_Clicked" MaximumWidthRequest="200"
+                        MaximumWidthRequest="130"
                         Grid.Column="0"/>
                         
-                <Button x:Name="GenerateNewKeysButton" Text="Generate new keys"
+                <Button x:Name="GenerateNewKeysButton" Text="Generate keys"
+                        Command="{Binding GenerateNewKeysCommand}"
                         TextColor="Azure" BackgroundColor="Black" 
-                        Clicked="GenerateNewKeysButton_Clicked" MaximumWidthRequest="200"
+                        MaximumWidthRequest="130"
                         Grid.Column="1"/>
                 
             </Grid>

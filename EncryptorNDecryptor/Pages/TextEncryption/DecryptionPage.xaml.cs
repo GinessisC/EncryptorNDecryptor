@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EncryptionOperationProviders.EncryptionServices.TextEncryption;
-using EncryptorNDecryptor.Helpers;
-using EncryptorNDecryptor.MessagesHandler;
 using EncryptorNDecryptor.Pages.TextEncryption.ViewModels;
 
 namespace EncryptorNDecryptor.Pages.TextEncryption;
 
 public partial class DecryptionPage : ContentPage
 {
-	private const string InputEncryptedMessageOriginalText = "Enter encrypted message"; 
-	private TextHandlingSettingsParams _textHandlingSettingsViewModel;
-	private Receiver _receiver;
+	private TextEncrParamsViewModel _textEncrViewModel;
 	public DecryptionPage()
 	{
 		InitializeComponent();
@@ -22,28 +18,15 @@ public partial class DecryptionPage : ContentPage
 	protected override void OnAppearing()
 	{
 		base.OnAppearing();
-	
-		_textHandlingSettingsViewModel = (TextHandlingSettingsParams)BindingContext;
+		_textEncrViewModel = (TextEncrParamsViewModel)BindingContext;
 		
-		var privateKey = _textHandlingSettingsViewModel.PrivateKey;
-		var publicKey = _textHandlingSettingsViewModel.PublicKey;
-		
-		_receiver = new(new(privateKey, publicKey));
 	}
-	private void Editor_Focused(object? sender, FocusEventArgs e)
-		=> EditorHelper.Editor_Focused(sender, e);
-
-	private void InputEncryptedMessageEditor_Tapped(object? sender, TappedEventArgs e)
-	{
-		EditorHelper.DeleteOriginalTextWhenTabbed(sender, InputEncryptedMessageOriginalText);
-	}
-
 	private async void DecryptMessageButton_Clicked(object? sender, EventArgs e)
 	{
+		var algorithm = _textEncrViewModel.Algorithm;
 		try
 		{
-			var standardizedMessage = StandardMessage.FromString(InputEncryptedMessageEditor.Text);
-			string decryptedMessage = await _receiver.GetDecryptedTextMessageAsync(standardizedMessage);
+			string decryptedMessage = await algorithm.GetDecryptedTextMessageAsync(InputEncryptedMessageEditor.Text);
 			DecryptedMessageEditor.Text = decryptedMessage;
 		}
 		catch (Exception exception)

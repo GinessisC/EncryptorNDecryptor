@@ -49,5 +49,4 @@ public partial class MainPage : ContentPage
 			await DisplayAlert("Error", exception.Message, "OK");
 		}
 	}
-	
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using EncryptorNDecryptor.Pages.TextEncryption.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace EncryptorNDecryptor;
 
@@ -21,7 +22,8 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
+		builder.Services.AddSingleton<AlgorithmSettingsViewModel>();
+		
 		return builder.Build();
 	}
 }

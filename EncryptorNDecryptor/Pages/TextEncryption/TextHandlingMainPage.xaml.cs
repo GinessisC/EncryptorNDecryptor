@@ -7,21 +7,21 @@ using EncryptorNDecryptor.Pages.TextEncryption.ViewModels;
 
 namespace EncryptorNDecryptor.Pages.TextEncryption;
 
-public partial class TextHandlingMainPage : TabbedPage
+public partial class TextHandlingMainPage : TabbedPage // rename to TextEncryptionDecryptionMainPage
 {
-	private TextHandlingSettingsParams _textHandlingSettingsParams;
-	public TextHandlingMainPage(TextHandlingSettingsParams textHandlingSettingsParams)
+	private readonly TextEncrParamsViewModel _textEncrParamsViewModel;
+	public TextHandlingMainPage(TextEncrParamsViewModel textEncrParamsViewModel)
 	{
 		InitializeComponent();
 		
-		_textHandlingSettingsParams = textHandlingSettingsParams;
+		_textEncrParamsViewModel = textEncrParamsViewModel;
 		
-		EncryptionPage.BindingContext = textHandlingSettingsParams;
-		DecryptionPage.BindingContext = textHandlingSettingsParams;
+		EncryptionPage.BindingContext = textEncrParamsViewModel;
+		DecryptionPage.BindingContext = textEncrParamsViewModel;
 	}
 
 	private async void OnSettingsClicked(object? sender, EventArgs e)
 	{
-		await Navigation.PushAsync(new TextHandlingSettings(_textHandlingSettingsParams));
+		await Navigation.PopAsync();
 	}
 }

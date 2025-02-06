@@ -3,34 +3,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EncryptorNDecryptor.Pages.TextEncryption.EncryptionPage">
-    <VerticalStackLayout Padding="30" Spacing="10">
         
+        <VerticalStackLayout Padding="30" Spacing="10">
+        <Label Text="Enter your message here ⬇️" />
         <Editor x:Name="InputMessageEditor"
                 BackgroundColor="WhiteSmoke"
-                Keyboard="Plain"
-                Text="Enter message"
-                TextColor="Gray"
-                HeightRequest="120"
-                Focused="Editor_Focused"
-                Margin="0, 20, 0, 0">
-            <Editor.GestureRecognizers>
-                <TapGestureRecognizer Tapped="InputMessageEditor_Tapped" />
-            </Editor.GestureRecognizers>
+                TextColor="Black"
+                HeightRequest="120">
         </Editor>
         
-        <Button x:Name="EncryptMessageButton" Text="Encrypt message" Clicked="EncryptMessageButton_Clicked" MaximumWidthRequest="200" />
+        <Button x:Name="EncryptMessageButton"
+                BackgroundColor="Black" Text="Encrypt message" Clicked="EncryptMessageButton_Clicked" MaximumWidthRequest="200" />
         
         <Editor x:Name="EncryptedMessageEditor" 
                 BackgroundColor="WhiteSmoke"
-                Margin="0, 20, 0, 0"
                 Keyboard="Plain"
                 Text="Here will be encrypted message"
-                TextColor="Gray"
+                TextColor="Black"
                 HeightRequest="120"
-                Focused="Editor_Focused"> 
+                Margin="0, 20, 0, 0">
         </Editor>
         
-        <Button x:Name="CopyEncryptedMessage"  Text="Copy" Clicked="CopyEncryptedMessage_OnClicked" MaximumWidthRequest="200" />
+        <Button x:Name="CopyEncryptedMessage"
+                BackgroundColor="Black" Text="Copy" Clicked="CopyEncryptedMessage_OnClicked" MaximumWidthRequest="200" />
         
     </VerticalStackLayout>
 </ContentPage>

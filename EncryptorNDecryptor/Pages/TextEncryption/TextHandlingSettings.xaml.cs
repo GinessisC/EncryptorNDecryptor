@@ -1,113 +1,144 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+using System.Windows.Input;
+using EncryptionOperationProviders.CipherParams;
 using EncryptionOperationProviders.EncryptionServices;
-using EncryptionOperationProviders.Helpers;
-using EncryptorNDecryptor.Helpers;
+using EncryptorNDecryptor.Interfaces;
+using EncryptorNDecryptor.MessagesEncryptors;
 using EncryptorNDecryptor.Pages.TextEncryption.ViewModels;
+using EncryptorNDecryptor.UserRequestHandlers;
 
 namespace EncryptorNDecryptor.Pages.TextEncryption;
 
 public partial class TextHandlingSettings : ContentPage
 {
-	private const string KeyOfAnotherUserOriginalText = "Enter public key of user";
-	private const string PublicKeyOriginalText = "Enter your public key";
-	private const string PrivateKeyOriginalText = "Enter your private key";
+	//private IUserRequestHandler? _userRequestHandler;
+	//public AlgorithmSettingsViewModel SettingsViewModel { get; }
+
 	public TextHandlingSettings()
 	{
 		InitializeComponent();
+		//BindingContext = new AlgorithmSettingsViewModel();
 	}
 	
-	public TextHandlingSettings(TextHandlingSettingsParams textHandlingSettingsParams)
-	{
-		InitializeComponent();
-		
-		PubicKeyOfAnotherUserEditor.Text = textHandlingSettingsParams.PublicKeyOfAnotherUser;
-		PubicKeyEditor.Text = textHandlingSettingsParams.PublicKey;
-		PrivateKeyEditor.Text = textHandlingSettingsParams.PrivateKey;
-	}
-	private void PublicKeyOfAnotherUserEditor_Tapped(object? sender, TappedEventArgs e)
-	{
-		EditorHelper.DeleteOriginalTextWhenTabbed(sender, KeyOfAnotherUserOriginalText);
-	}
-	private void PublicKeyEditor_Tapped(object? sender, TappedEventArgs e)
-	{
-		EditorHelper.DeleteOriginalTextWhenTabbed(sender, PublicKeyOriginalText);
-	}
-
-	private void PrivateKeyEditor_Tapped(object? sender, TappedEventArgs e)
-	{
-		EditorHelper.DeleteOriginalTextWhenTabbed(sender, PrivateKeyOriginalText);
-	}
 	
-	private async void SaveSettingsButton_Clicked(object? sender, EventArgs e)
-	{
-		TextHandlingSettingsParams? clientSettings = await GetTextHandlingSettingsParams(PubicKeyEditor.Text,
-			PrivateKeyEditor.Text,
-			PubicKeyOfAnotherUserEditor.Text);
-
-		if (clientSettings != null)
-		{
-			var previousPage = Navigation.NavigationStack.Count > 1 
-				? Navigation.NavigationStack[Navigation.NavigationStack.Count - 2] 
-				: null;
-		
-			if (previousPage is TextHandlingMainPage)
-			{
-				await Navigation.PopAsync();
-			}
-			else
-			{
-				await Navigation.PushAsync(new TextHandlingMainPage(clientSettings));
-			}
-		}
-	}
-
-	private async Task<TextHandlingSettingsParams?> GetTextHandlingSettingsParams(string publicKey, string privateKey, string publicKeyOfAnotherUser)
-	{
-		var isPublicKeyValid = await RsaKeyHelper.IsRsaKeyValidAsync(publicKey);
-		var isPrivateKeyValid = await RsaKeyHelper.IsRsaKeyValidAsync(privateKey);
-		var isPublicKeyOfAnotherUserValid = await RsaKeyHelper.IsRsaKeyValidAsync(publicKeyOfAnotherUser);
-
-		if (isPublicKeyValid && isPrivateKeyValid && isPublicKeyOfAnotherUserValid)
-		{
-			return new TextHandlingSettingsParams
-			{
-				PrivateKey = privateKey,
-				PublicKey = publicKey,
-				PublicKeyOfAnotherUser = publicKeyOfAnotherUser
-			};
-		}
-		await DisplayAlert($"Error", $"Not all fields are filled or input data are incorrect", "OK");
-		return null;
-	}
 	
-	private void Editor_Focused(object? sender, FocusEventArgs e)
-		=> EditorHelper.Editor_Focused(sender, e);
-
-	private void GenerateNewKeysButton_Clicked(object? sender, EventArgs e)
-	{
-		var keys = RsaEncryptionService.InitializeNewRsaKeys();
-		
-		PubicKeyEditor.Text = keys.PublicKey;
-		PrivateKeyEditor.Text = keys.PrivateKey;
-		PubicKeyEditor.TextColor = Colors.Black;
-		PrivateKeyEditor.TextColor = Colors.Black;
-	}
-
-	// private async Task HandleAppException(Exception exception)
+	// private void SetSettings(TextEncrParamsViewModel textEncrDecrSettingsParams)
 	// {
-	// 	switch (exception)
+	// 	if (textEncrDecrSettingsParams.UserRsaParams != null)
 	// 	{
-	// 		case XmlException:
-	// 			await DisplayAlert($"Error", $"Not all fields are filled or input data are incorrect", "OK");
-	// 			break;
-	// 		default:
-	// 			await DisplayAlert($"Unknown error ", $"{exception.InnerException}\nMessage: {exception.Message}", "OK");
-	// 			break;
+	// 		SetSettingsForRsaAlg(textEncrDecrSettingsParams.UserRsaParams);
+	// 	}
+	// 	else if (textEncrDecrSettingsParams.UserAesParams != null)
+	// 	{
+	// 		SetSettingsForAesAlg(textEncrDecrSettingsParams.UserAesParams);
 	// 	}
 	// }
+
+	private void SetSettingsForRsaAlg(RsaParams rsaParams)
+	{
+		PubicKeyOfAnotherUserEditor.Text = rsaParams.PublicKeyOfAnotherUser;
+		PubicKeyEditor.Text = rsaParams.PublicKey;
+		PrivateKeyEditor.Text = rsaParams.PrivateKey;
+	}
+
+	private void SetSettingsForAesAlg(AesParams aesParams)
+	{
+		AesKeyEditor.Text = aesParams.Key;
+		AesIvEditor.Text = aesParams.IV;
+	}
+	// private async void SaveSettingsButton_Clicked(object? sender, EventArgs e)
+	// {
+	// 	try
+	// 	{
+	// 		await _userRequestHandler.PushToNextPageWithParams();
+	// 	}
+	// 	catch (Exception exception)
+	// 	{
+	// 		await DisplayAlert("Error", $"Check all fields on validity. Message: {exception}", "OK");
+	// 	}
+	// }
+	
+	
+	private async void EncAlgorithmPicker_OnSelectedIndexChanged(object? sender, EventArgs e)
+	{
+		string selectedItem = EncAlgorithmPicker.SelectedItem.ToString();
+		
+		if (string.IsNullOrEmpty(selectedItem))
+		{
+			await DisplayAlert("Error", "Please select an encryption algorithm", "OK");
+
+			return;
+		}
+		HandleAlgorithmChoice(selectedItem);
+		
+		var bindingContext = BindingContext as AlgorithmSettingsViewModel;
+		bindingContext.UserRequestHandler = AlgFactory.GenerateAlgSettings(selectedItem, this, bindingContext);
+	}
+	private void HandleAlgorithmChoice(string selectedItem)
+	{
+		switch (selectedItem)
+		{
+			case "AES":
+				WhenAesIsSelected();
+				break;
+			case "RSA":
+				WhenRsaIsSelected();
+				break;
+			default:
+				WhenNoneIsSelected();
+				break;
+		}
+	}
+	
+	private void WhenAesIsSelected()
+	{
+		MakeVisibleRsaEditorsAndLabels(false);
+		MakeVisibleAesEditorsAndLabels(true);
+	}
+	private void WhenRsaIsSelected()
+	{
+		MakeVisibleRsaEditorsAndLabels(true);
+		MakeVisibleAesEditorsAndLabels(false);
+	}
+	
+	private void WhenNoneIsSelected()
+	{
+		MakeVisibleAesEditorsAndLabels(false);
+		MakeVisibleRsaEditorsAndLabels(false);
+	}
+	private void MakeVisibleAesEditorsAndLabels(bool isVisible)
+	{
+		MakeVisibleAesLabels(isVisible);
+		MakeVisibleAesEditors(isVisible);
+	}
+	private void MakeVisibleAesLabels(bool isVisible)
+	{
+		AesKeyLabel.IsVisible = isVisible;
+		AesIvLabel.IsVisible = isVisible;
+	}
+	private void MakeVisibleAesEditors(bool isVisible)
+	{
+		AesKeyEditor.IsVisible = isVisible;
+		AesIvEditor.IsVisible = isVisible;
+	}
+	
+	private void MakeVisibleRsaEditorsAndLabels(bool isVisible)
+	{
+		MakeVisibleRsaLabels(isVisible);
+		MakeVisibleRsaEditors(isVisible);
+	}
+	
+	private void MakeVisibleRsaLabels(bool isVisible)
+	{
+		PubicKeyOfAnotherUserLabel.IsVisible = isVisible;
+		PublicKeyLabel.IsVisible = isVisible;
+		PrivateKeyLabel.IsVisible = isVisible;
+	}
+	
+	private void MakeVisibleRsaEditors(bool isVisible)
+	{
+		PubicKeyOfAnotherUserEditor.IsVisible = isVisible;
+		PubicKeyEditor.IsVisible = isVisible;
+		PrivateKeyEditor.IsVisible = isVisible;
+	}
+	
 }
