@@ -103,7 +103,8 @@
     <ItemGroup>
       <Folder Include="Helpers\" />
     </ItemGroup>
-    
+
+    <!--For release-->
     
     
 </Project>

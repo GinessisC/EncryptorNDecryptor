@@ -14,7 +14,6 @@ public static class AlgFactory
 			"RSA" => new RsaAlgRequestHandler(viewModel, contentPage),
 			"AES" => new AesAlgRequestHandler(viewModel, contentPage),
 			"BASE64" => new Base64AlgRequestHandler(contentPage),
-			_ => throw new NotImplementedException()
 		};
 	}
 }

@@ -10,9 +10,7 @@ public class AesAlg : IAlgorithm
 	private readonly AesEncryptionService _aes;
 	public AesAlg(AesParams aesParams)
 	{
-		_aes = new AesEncryptionService(
-			Convert.FromBase64String(aesParams.Key),
-			Convert.FromBase64String(aesParams.IV));
+		_aes = new AesEncryptionService(aesParams);
 	}
 	
 	public async Task<string> GetDecryptedTextMessageAsync(string receivedRowMessage)
@@ -22,11 +20,10 @@ public class AesAlg : IAlgorithm
 		var originalText = await textEncryptionService.DecryptTextAsync(receivedRowMessage);
 		return originalText;
 	}
-
+    
 	public async Task<string> GetEncryptedMessageAsync(string plainText)
 	{
-		AesEncryptionService aes = new(_aes.GetKey(), _aes.GetIV());
-		TextEncryptionService service = new(aes);
+		TextEncryptionService service = new(_aes);
 		string encryptedMessage = await service.EncryptTextAsync(plainText);
 		
 		return encryptedMessage;
