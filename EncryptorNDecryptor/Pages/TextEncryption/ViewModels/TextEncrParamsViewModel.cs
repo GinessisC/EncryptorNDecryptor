@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using EncryptionOperationProviders.CipherParams;
 using EncryptorNDecryptor.Interfaces;
 
 namespace EncryptorNDecryptor.Pages.TextEncryption.ViewModels;

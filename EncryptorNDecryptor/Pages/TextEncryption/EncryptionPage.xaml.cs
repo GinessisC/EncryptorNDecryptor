@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EncryptionOperationProviders.CipherParams;
-using EncryptionOperationProviders.EncryptionServices.TextEncryption;
 using EncryptorNDecryptor.Pages.TextEncryption.ViewModels;
 
 namespace EncryptorNDecryptor.Pages.TextEncryption;

@@ -61,9 +61,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\EncryptionOperationProvidersSol\EncryptionOperationProviders\EncryptionOperationProviders.csproj" />
-    </ItemGroup>
+    
 
     <ItemGroup>
       <MauiXaml Update="Pages\FileEncryption\FileEncryptionPage.xaml">
@@ -103,6 +101,12 @@
     <ItemGroup>
       <Folder Include="Helpers\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EncryptionOperationProvidersSol\EncryptionOperationProviders\EncryptionOperationProviders.csproj" />
+    </ItemGroup>
+
+  
 
     <!--For release-->
     

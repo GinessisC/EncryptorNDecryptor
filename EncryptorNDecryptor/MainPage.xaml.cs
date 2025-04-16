@@ -1,5 +1,4 @@
-﻿using EncryptionOperationProviders;
-using EncryptorNDecryptor.Pages.TextEncryption;
+﻿using EncryptorNDecryptor.Pages.TextEncryption;
 using EncryptorNDecryptor.Pages;
 using EncryptorNDecryptor.Pages.FileEncryption;
 
