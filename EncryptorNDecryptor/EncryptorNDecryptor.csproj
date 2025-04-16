@@ -103,7 +103,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\EncryptionOperationProvidersSol\EncryptionOperationProviders\EncryptionOperationProviders.csproj" />
+      <ProjectReference Include="..\EncryptionOperationProviders\EncryptionOperationProviders.csproj" />
     </ItemGroup>
 
   

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptorNDecryptor", "EncryptorNDecryptor\EncryptorNDecryptor.csproj", "{EC75ACEE-F58C-437B-A135-BD7C4B1575E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionOperationProviders", "EncryptionOperationProvidersSol\EncryptionOperationProviders\EncryptionOperationProviders.csproj", "{B7434216-0940-4861-80CF-EBFB3CDE40C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionOperationProviders", "EncryptionOperationProviders\EncryptionOperationProviders.csproj", "{37B04589-2F49-4A11-8977-5DBCEA252C5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{EC75ACEE-F58C-437B-A135-BD7C4B1575E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC75ACEE-F58C-437B-A135-BD7C4B1575E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC75ACEE-F58C-437B-A135-BD7C4B1575E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7434216-0940-4861-80CF-EBFB3CDE40C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7434216-0940-4861-80CF-EBFB3CDE40C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7434216-0940-4861-80CF-EBFB3CDE40C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7434216-0940-4861-80CF-EBFB3CDE40C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B04589-2F49-4A11-8977-5DBCEA252C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B04589-2F49-4A11-8977-5DBCEA252C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B04589-2F49-4A11-8977-5DBCEA252C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B04589-2F49-4A11-8977-5DBCEA252C5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
