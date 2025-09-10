@@ -6,8 +6,8 @@ namespace EncryptorNDecryptor;
 
 public partial class MainPage : ContentPage
 {
-	private const string TelegramUrl = "https://t.me/Mempackk";
-	private const string YouTubeUrl = "https://www.youtube.com/@ITLaper";
+	private const string TelegramUrl = "t.me/your_link";
+	private const string YouTubeUrl = "https://www.youtube.com/@yourchannel";
 	private const string GithubUrl = "https://github.com/GinessisC";
 	
 	public MainPage()
